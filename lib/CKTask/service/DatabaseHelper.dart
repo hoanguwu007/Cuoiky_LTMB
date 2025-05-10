@@ -136,7 +136,6 @@ class DatabaseService {
     return maps.isEmpty; // Trả về true nếu không có công việc nào chưa hoàn thành
   }
 
-  // CRUD cho CongViec
   // Thêm công việc mới vào cơ sở dữ liệu
   Future<void> themCongViec(CongViec task) async {
     final db = await layCSDL;

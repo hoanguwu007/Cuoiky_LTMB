@@ -49,7 +49,7 @@ class _TaskFormViewState extends State<TaskFormView> {
       await taiDuLieuBanDau();
     });
   }
-
+  //phân quyền gán công việc
   Future<void> taiDuLieuBanDau() async {
     final currentUser = await _authService.theoDoiTrangThaiDangNhap.first;
     if (currentUser == null) {
@@ -62,9 +62,11 @@ class _TaskFormViewState extends State<TaskFormView> {
     final currentUserData = await _databaseService.layNguoiDung(currentUser.maNguoiDung);
     setState(() {
       _currentUserId = currentUser.maNguoiDung;
+      //xác định vai trò của người dùng hiện tại (admin hoặc user).
       _currentUserRole = currentUserData?.vaiTro ?? 'user';
       _users = users;
       if (_currentUserRole != 'admin' && _assignedTo == null) {
+        // Tài khoản thông thường chỉ có thể gán công việc cho chính họ khi tạo mới công việc
         _assignedTo = _currentUserId;
       }
     });
@@ -321,9 +323,9 @@ class _TaskFormViewState extends State<TaskFormView> {
                             value: null,
                             child: Text('Không có'),
                           ),
-                          ...(_currentUserRole == 'admin'
-                              ? _users
-                              : _users.where((user) => user.maNguoiDung == _currentUserId))
+                          ...(_currentUserRole == 'admin'// Kiểm tra vai trò người dùng
+                              ? _users// Nếu là admin, hiển thị tất cả người dùng
+                              : _users.where((user) => user.maNguoiDung == _currentUserId))// Nếu không phải admin, chỉ hiển thị chính người dùng hiện tại
                               .map((user) => DropdownMenuItem<String>(
                             value: user.maNguoiDung,
                             child: Text(user.tenDangNhap),

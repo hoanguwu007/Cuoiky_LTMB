@@ -403,7 +403,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final isAdmin = _currentUserRole == 'admin';
+    final isAdmin = _currentUserRole == 'admin'; //nếu ng dùng là admin
     return Theme(
       data: isAdmin
           ? ThemeData(
@@ -417,7 +417,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       )
-          : ThemeData(
+          : ThemeData( //nếu ng dùng là user
         primarySwatch: Colors.teal,
         scaffoldBackgroundColor: Colors.grey.shade100,
         cardColor: Colors.teal.shade50,

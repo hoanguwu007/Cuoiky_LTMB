@@ -35,7 +35,7 @@ class _LoginViewState extends State<LoginView> {
       });
 
       try {
-        final user = await _authService.dangNhapVoiEmailVaMatKhau(
+        final user = await _authService.dangNhapVoiEmailVaMatKhau( //Dữ liệu được xác thực qua Firebase
           _emailController.text.trim(),
           _passwordController.text.trim(),
         );
@@ -71,7 +71,7 @@ class _LoginViewState extends State<LoginView> {
     });
 
     try {
-      final user = await _authService.dangNhapVoiGoogle();
+      final user = await _authService.dangNhapVoiGoogle(); //Dữ liệu được xác thực qua Firebase
 
       setState(() {
         _isLoading = false;

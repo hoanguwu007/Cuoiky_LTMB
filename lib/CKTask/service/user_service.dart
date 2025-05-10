@@ -55,7 +55,7 @@ class AuthService {
 
   // Đăng nhập bằng email và mật khẩu
   Future<NguoiDung?> dangNhapVoiEmailVaMatKhau(String email, String password) async {
-    try {
+    try {//Nếu thành công, Firebase trả về đối tượng UserCredential chứa thông tin người dùng user
       UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
@@ -80,7 +80,7 @@ class AuthService {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
+      //Thông tin xác thực  được gửi đến Firebase để đăng nhập
       final UserCredential result = await _auth.signInWithCredential(credential);
       final user = result.user;
       if (user == null) return null;
